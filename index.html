@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Converter</title>
+    <style>
+      /* Style the form and its elements */
+      body{
+        height:100vh;
+        background: linear-gradient(to top left, #7d65fffa, #2867c6);
+      }
+      .mainbody{
+        background-color: whitesmoke;
+        width:25%;
+        margin-inline: auto;
+        margin-top:5rem;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        text-align: left;
+      }
+      form{
+        margin-left:4rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      input[type="number"] {
+        width: 8rem;
+        padding: 5px;
+        margin-bottom: 20px;
+      }
+      select {
+        width: 9rem;
+        padding: 5px;
+        margin-bottom: 20px;
+      }
+      button {
+        display: block;
+        padding: 6px;
+        border-radius: 5px;
+        background-color: #008CBA;
+        color: #fff;
+        border:none;
+        cursor: pointer;
+        width:6rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 18px;
+        font-weight:600;
+        transition:0.5s;
+      }
+      button:hover{
+        background-color: white;
+        color:#008CBA;
+        transition:0.5s;
+      }
+      /* Style the output */
+      #output {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mainbody">
+      <h1 style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:crimson">Unit Converter</h1>
+    <form id="converter-form">
+        
+      <label for="value">Value: 
+       </label>
+       <input type="number" id="value" name="value" required>
+      
+      
+      <label for="from-unit">From:
+      </label>
+      <select id="from-unit" name="from-unit" required>
+        <option value="inches">Inches</option>
+        <option value="centimeters">Centimeters</option>
+        <option value="meters">Meters</option>
+        </select>
+      
+      <label for="to-unit">To:</label>
+      <select id="to-unit" name="to-unit" required>
+        <option value="inches">Inches</option>
+        <option value="centimeters">Centimeters</option>
+        <option value="meters">Meters</option>
+      </select>
+      
+      <button type="submit">Convert</button>
+    </form>
+  
+    <div id="output"></div>
+  </div>
+    <script>
+      const form = document.querySelector("#converter-form");
+      const output = document.querySelector("#output");
+      
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const value = parseFloat(document.querySelector("#value").value);
+        const fromUnit = document.querySelector("#from-unit").value;
+        const toUnit = document.querySelector("#to-unit").value;
+        const result = convert(value, fromUnit, toUnit);
+        output.textContent = `${value} ${fromUnit} is equal to ${result} ${toUnit}.`;
+      });
+      
+      function convert(value, fromUnit, toUnit) {
+  let result = 0;
+  if (fromUnit === "inches" && toUnit === "centimeters") {
+    result = value * 2.54;
+  } else if (fromUnit === "inches" && toUnit === "meters") {
+    result = value * 0.0254;
+  } else if (fromUnit === "centimeters" && toUnit === "inches") {
+    result = value / 2.54;
+  } else if (fromUnit === "centimeters" && toUnit === "meters") {
+    result = value / 100;
+  } else if (fromUnit === "meters" && toUnit === "inches") {
+    result = value / 0.0254;
+  } else if (fromUnit === "meters" && toUnit === "centimeters") {
+    result = value * 100;
+  }
+  return result;
+}
+</script>
+</body>
+</html>
+
